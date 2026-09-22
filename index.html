@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>🐓 SABONG ARENA - WALA vs MERON</title>
+<link rel="stylesheet" href="style.css">
+<script type="importmap">{"imports":{"peerjs":"https://cdn.jsdelivr.net/npm/peerjs@1.5.2/+esm"}}</script>
+</head>
+<body>
+<audio id="bgMusic" loop preload="auto"><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"></audio>
+<audio id="fightMusic" loop preload="auto"><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg"></audio>
+
+<button id="musicBtn" onclick="toggleMusic()">🔇 MUSIC</button>
+<button class="aboutBtn" onclick="toggleAbout()">☰</button>
+
+<div id="feedModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000c;z-index:9999;align-items:center;justify-content:center"><div style="background:#151515;border:2px solid #444;border-radius:16px;padding:16px;width:92%;max-width:380px"><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="color:#fff;font-family:'Black Ops One'">🍽️ <span id="feedChickenName">Manok</span></h3><button onclick="closeFeedModal()" style="background:#222;color:#fff;border:none;padding:6px 10px;border-radius:8px">✕</button></div><div id="feedChickenStats" style="background:#0a0a0a;padding:10px;border-radius:10px;margin:12px 0;font-size:12px;border:1px solid #222"></div><div id="feedInventoryList" style="display:grid;gap:6px"></div></div></div>
+
+<div id="sellModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000c;z-index:9999;align-items:center;justify-content:center"><div style="background:#151515;border:2px solid #444;border-radius:16px;padding:16px;width:92%;max-width:340px;text-align:center"><h3 style="color:#fff;font-family:'Black Ops One'">💸 Benta?</h3><div id="sellChickenInfo" style="margin:12px 0;font-size:12px"></div><div style="display:flex;gap:8px;justify-content:center"><button onclick="closeSellModal()" style="background:#222;color:#fff;padding:10px 16px;border:none;border-radius:10px">Cancel</button><button id="confirmSellBtn" style="background:#ff3333;color:#fff;padding:10px 16px;border:none;border-radius:10px;font-family:'Black Ops One'">Benta</button></div></div></div>
+
+<div id="aboutOverlay" onclick="toggleAbout()"></div>
+<div id="aboutSidebar">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2 style="color:#fff;font-family:'Black Ops One';margin:0">SABONG</h2><button onclick="toggleAbout()" style="background:#222;color:#fff;border:none;padding:6px 10px;border-radius:8px">✕</button></div>
+<div style="margin-top:14px;font-size:12px;line-height:1.7;color:#aaa;background:#0a0a0a;padding:12px;border-radius:12px;border:1px solid #222">
+<p>🐓 Arena - WALA vs MERON<br>🔥 20 breeds, 30 bettors<br>💬 Real talk, iba iba usapan<br>💰 Malalaki taya 10k+</p>
+</div>
+</div>
+
+<div id="app">
+<header>
+<h1>🐓 ARENA</h1>
+<div id="res"><div>💰 <span id="pesos">500</span></div><div>🌽 <span id="feeds">0</span></div><div id="peerCount">⏳</div></div>
+</header>
+
+<nav>
+<button class="active" onclick="showPage('farm')">FARM</button>
+<button onclick="showPage('breed')">BREED</button>
+<button onclick="showPage('watch')">LIVE</button>
+<button onclick="showPage('market')">MARKET</button>
+<button onclick="showPage('auction')">GLOBAL</button>
+</nav>
+
+<div id="farm" class="page active">
+<div class="farm-header"><div class="farm-title"><h2>MY FARM</h2><p><span id="farmCount">0 manok</span> • <span id="farmPesos">P500</span> • <span id="farmFeeds">0 feeds</span></p></div></div>
+<div id="farmGrid" class="farm-grid"></div>
+</div>
+
+<div id="breed" class="page">
+<div class="breed-header"><div class="breed-title"><h2>BREEDING</h2><p>Cross • Hatch • Grow</p></div></div>
+<div class="pairing-station"><div class="pair-slot"><div class="slot-label">LALAKI</div><select id="maleSel"></select><div class="slot-preview" id="malePreview">Pili...</div></div><div class="vs-divider"><div class="vs-circle">VS</div><div style="font-size:10px;color:#666">30 feeds</div></div><div class="pair-slot"><div class="slot-label">BABAE</div><select id="femaleSel"></select><div class="slot-preview" id="femalePreview">Pili...</div></div></div>
+<div class="breed-action"><button class="breed-btn" onclick="breedNow()">BREED - 30 FEEDS</button><div id="breedMsg" class="breed-msg"></div></div>
+<div class="incubator-machine"><div id="incubator" class="incubator-status">Walang itlog...</div></div>
+<div class="breed-collection-title"><h3>FLOCK</h3><div class="collection-count" id="breedCount">0</div></div>
+<div id="breedGrid" class="farm-grid"></div>
+</div>
+
+<div id="watch" class="page">
+<div style="background:#111;border:1px solid #222;padding:12px;border-radius:12px">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<h3 style="font-family:'Black Ops One';color:#fff">LIVE ARENA • WALA vs MERON</h3>
+<div id="spriteStatus" style="font-size:10px;color:#666">READY</div>
+</div>
+<div style="display:flex;gap:8px;margin-top:12px"><button id="modeFightBtn" onclick="setLiveMode('fight')" style="flex:1;background:#222;color:#fff;padding:12px;border:none;border-radius:10px;font-family:'Black Ops One';font-size:11px;border:1px solid #333">AKO LALABAN</button><button id="modeWatchBtn" onclick="setLiveMode('watch')" style="flex:1;background:#111;color:#666;padding:12px;border:none;border-radius:10px;font-family:'Black Ops One';font-size:11px;border:1px solid #222">MANOOD</button></div>
+<div id="playerSelectBox" style="background:#0a0a0a;border:1px solid #222;border-radius:10px;padding:10px;margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><select id="liveChickenSel" style="flex:1;min-width:140px;background:#000;color:#fff;border:1px solid #333;padding:8px;border-radius:8px"></select><button onclick="selectLiveChicken()" style="background:#fff;color:#000;padding:8px 14px;border:none;border-radius:8px;font-family:'Black Ops One'">GAMITIN</button><div id="liveMyChickenInfo" style="width:100%;font-size:10px;color:#666">Pili manok mo...</div></div>
+<div id="watchModeBox" style="background:#0a0a0a;border:1px dashed #222;border-radius:10px;padding:10px;margin-top:12px;display:none;text-align:center"><div style="font-family:'Black Ops One';color:#888;font-size:11px">MANOOD MODE</div></div>
+<div id="bettingPhase" style="background:#0f0f0f;border:1px solid #333;padding:12px;border-radius:12px;margin-top:12px;text-align:center"><div style="font-family:'Black Ops One';color:#888;font-size:12px">TAYAAN</div><div id="bettingTimer" style="font-family:'Black Ops One';font-size:36px;color:#fff;margin:6px 0">20</div><div id="bettingStatus" style="font-size:10px;color:#666">Pili mode...</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px"><div style="background:#0a0a0a;padding:10px;border-radius:10px;text-align:center;border:1px solid #333" id="watchLeftBox"><div style="font-family:'Black Ops One';color:#ff4444;font-size:10px" id="leftLabel">WALA</div><div style="background:#222;height:8px;border-radius:4px;margin:6px 0;overflow:hidden"><div id="watchHp1" style="width:100%;height:100%;background:#ff4444;transition:0.3s"></div></div><div id="watchName1" style="font-size:12px;font-family:'Black Ops One';color:#fff">WALA</div><div id="watchHpText1" style="font-size:9px;color:#666">HP: 0</div><div id="watchBet1" style="font-size:10px;color:#888;margin-top:4px">P0 • 0 bettors</div></div><div style="background:#0a0a0a;padding:10px;border-radius:10px;text-align:center;border:1px solid #333"><div style="font-family:'Black Ops One';color:#4444ff;font-size:10px" id="rightLabel">MERON</div><div style="background:#222;height:8px;border-radius:4px;margin:6px 0;overflow:hidden"><div id="watchHp2" style="width:100%;height:100%;background:#4444ff;transition:0.3s"></div></div><div id="watchName2" style="font-size:12px;font-family:'Black Ops One';color:#fff">MERON</div><div id="watchHpText2" style="font-size:9px;color:#666">HP: 0</div><div id="watchBet2" style="font-size:10px;color:#888;margin-top:4px">P0 • 0 bettors</div></div></div>
+<canvas id="watchCanvas" width="800" height="320" style="width:100%;background:#050505;border:1px solid #222;border-radius:12px;margin-top:10px"></canvas>
+<div style="background:#0a0a0a;border:1px solid #222;border-radius:10px;padding:10px;margin-top:10px"><div style="font-family:'Black Ops One';color:#888;font-size:10px;margin-bottom:8px;display:flex;justify-content:space-between"><span>30 BETTORS</span><span id="totalPot" style="color:#fff">POT: P0</span></div><div id="bettorsList" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:260px;overflow:auto"></div></div>
+<div style="background:#0a0a0a;padding:8px;border-radius:8px;margin-top:8px;text-align:center;border:1px solid #222"><div id="watchWinner" style="font-family:'Black Ops One';font-size:12px;color:#888">READY TO FIGHT</div></div>
+<div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;justify-content:center;align-items:center;background:#0a0a0a;padding:10px;border-radius:10px"><button id="startLiveBtn" onclick="startBettingPhase()" style="background:#fff;color:#000;padding:12px 20px;border:none;border-radius:10px;font-family:'Black Ops One';font-size:12px">LABAN</button><input id="watchBetAmount" type="number" value="1000" min="100" step="500" style="width:90px;padding:10px;border-radius:8px;border:1px solid #333;background:#000;color:#fff" placeholder="P"><button onclick="betOnNpc(1)" id="betBtn1" style="background:#222;color:#fff;padding:10px 14px;border:none;border-radius:8px;font-family:'Black Ops One';border:1px solid #ff4444">WALA</button><button onclick="betOnNpc(2)" id="betBtn2" style="background:#222;color:#fff;padding:10px 14px;border:none;border-radius:8px;font-family:'Black Ops One';border:1px solid #4444ff">MERON</button></div>
+<div id="watchLog" style="background:#000;padding:8px;border-radius:8px;margin-top:8px;font-size:10px;height:70px;overflow:auto;border:1px solid #111;color:#666"></div>
+<div id="watchTrashTalk" style="text-align:center;margin-top:6px;font-size:11px;color:#888;background:#0a0a0a;padding:8px;border-radius:8px;border:1px solid #111;min-height:36px;display:flex;align-items:center;justify-content:center"></div>
+</div>
+</div>
+
+<div id="market" class="page">
+<div class="market-header"><h2 style="font-family:'Black Ops One';color:#fff">MARKET</h2><p style="font-size:10px;color:#666">20 rare breeds • 20k to 80k</p><div class="market-tabs" style="display:flex;gap:6px;margin-top:10px"><button id="tabChickenShop" class="active" onclick="showMarketTab('chickenShop')" style="flex:1;padding:8px;border:none;border-radius:8px;background:#fff;color:#000;font-family:'Black Ops One';font-size:10px">CHICKEN</button><button id="tabFeedShop" onclick="showMarketTab('feedShop')" style="flex:1;padding:8px;border:none;border-radius:8px;background:#111;color:#666;font-family:'Black Ops One';font-size:10px;border:1px solid #222">FEED</button><button id="tabSell" onclick="showMarketTab('sell')" style="flex:1;padding:8px;border:none;border-radius:8px;background:#111;color:#666;font-family:'Black Ops One';font-size:10px;border:1px solid #222">SELL</button></div></div>
+<div id="market-chickenShop" class="market-content" style="margin-top:10px"><div style="font-size:10px;color:#666;margin-bottom:8px">💰 P<span id="marketPesos">500</span> • STOCK: <span id="invCount">0</span></div><div id="fullChickenShop" class="chicken-shop-grid"></div></div>
+<div id="market-feedShop" class="market-content" style="display:none;margin-top:10px"><div id="feedShop" class="feed-shop-grid"></div></div>
+<div id="market-sell" class="market-content" style="display:none;margin-top:10px"><div id="sellChickenGrid" class="farm-grid"></div></div>
+</div>
+
+<div id="auction" class="page">
+<div class="global-header"><h2 style="font-family:'Black Ops One';color:#fff">GLOBAL</h2><div id="myRoomId" style="font-size:10px;color:#666;background:#0a0a0a;padding:6px 10px;border-radius:8px;border:1px solid #222;margin-top:8px">⏳ CONNECTING...</div><div style="display:flex;gap:6px;margin-top:10px"><button onclick="autoJoinGlobal()" style="background:#fff;color:#000;padding:10px 14px;border:none;border-radius:8px;font-family:'Black Ops One';font-size:10px">JOIN</button><button onclick="saveGame()" style="background:#111;color:#fff;padding:10px 14px;border:none;border-radius:8px;font-family:'Black Ops One';font-size:10px;border:1px solid #222">SAVE</button></div></div>
+<div class="global-section" style="margin-top:12px"><h3 style="font-family:'Black Ops One';font-size:10px;color:#666">ONLINE</h3><div id="globalPlayers" class="global-players"></div></div>
+<div class="global-section" style="margin-top:12px"><h3 style="font-family:'Black Ops One';font-size:10px;color:#666">CHAT</h3><div id="chatBox" class="global-chat"></div><div style="display:flex;gap:6px;margin-top:8px"><input id="chatInput" placeholder="Chat..." style="flex:1;background:#000;color:#fff;border:1px solid #222;padding:8px;border-radius:8px"><button onclick="sendGlobalChat()" style="background:#fff;color:#000;padding:8px 12px;border:none;border-radius:8px;font-family:'Black Ops One'">SEND</button></div></div>
+</div>
+
+</div>
+</div>
+<script>function toggleAbout(){document.getElementById('aboutSidebar').classList.toggle('open');document.getElementById('aboutOverlay').classList.toggle('open');}function showMarketTab(tab){document.querySelectorAll('.market-content').forEach(e=>e.style.display='none');document.querySelectorAll('.market-tabs button').forEach(e=>{e.style.background='#111';e.style.color='#666'});document.getElementById('market-'+tab).style.display='block';const act=document.getElementById('tab'+tab.charAt(0).toUpperCase()+tab.slice(1));if(act){act.style.background='#fff';act.style.color='#000';}}</script>
+<script type="module" src="script.js"></script>
+</body>
+</html>

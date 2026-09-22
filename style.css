@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Inter:wght@400;600;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;background:radial-gradient(ellipse at top,#1a0a00,#0a0000 60%,#000 100%)}
+body{color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden}
+#app{height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden}
+header{display:flex;justify-content:space-between;align-items:center;padding:10px 50px 10px 14px;background:linear-gradient(90deg,#ff4400,#ff8800);border-bottom:2px solid #ff6600;flex-shrink:0;box-shadow:0 2px 20px #ff440088}
+header h1{font-family:'Black Ops One';font-size:15px;color:#fff;letter-spacing:1px;text-shadow:0 0 10px #000,0 0 20px #ff4400}
+#res{display:flex;gap:8px;font-size:11px;font-weight:800}
+#res div{background:#000c;padding:5px 12px;border-radius:20px;border:1px solid #ff660055;color:#ffcc88;box-shadow:0 0 10px #ff440033 inset}
+#res div span{color:#fff}
+nav{display:flex;gap:6px;padding:10px;background:linear-gradient(90deg,#1a0a00,#2a1000);overflow-x:auto;flex-shrink:0;border-bottom:2px solid #ff4400;scrollbar-width:none;box-shadow:0 4px 10px #000}
+nav::-webkit-scrollbar{display:none}
+nav button{padding:10px 16px;border:none;border-radius:10px;background:linear-gradient(#222,#111);color:#ff8844;font-family:'Black Ops One';font-size:10px;white-space:nowrap;border:1px solid #ff440033;transition:0.2s;letter-spacing:0.5px;box-shadow:0 2px 0 #000}
+nav button.active{background:linear-gradient(#ff6600,#ff4400);color:#fff;border-color:#ff8800;box-shadow:0 0 15px #ff4400,0 2px 0 #880000;transform:translateY(-1px)}
+.page{display:none;flex:1;overflow-y:auto;padding:12px;overflow-x:hidden;background:radial-gradient(ellipse at top,#1a1000,#0a0500 60%,#000 100%)}
+.page.active{display:block}
+.farm-header{background:linear-gradient(135deg,#ff4400 0%,#ff8800 100%);border:1px solid #ff6600;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 4px 20px #ff440055,0 0 40px #ff440022 inset}
+.farm-title h2{font-family:'Black Ops One';font-size:17px;color:#fff;margin:0;text-shadow:0 2px 0 #000}
+.farm-title p{font-size:11px;color:#ffdd88;margin-top:4px;font-weight:600}
+.farm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.farm-card{background:linear-gradient(145deg,#1e1200,#0f0a00);border:1px solid #ff660044;border-radius:14px;padding:12px;font-size:11px;transition:0.2s;cursor:pointer;box-shadow:0 4px 15px #000,0 0 20px #ff440011 inset}
+.farm-card:hover{border-color:#ff6600;background:linear-gradient(145deg,#2a1a00,#1a0f00);transform:translateY(-2px) scale(1.02);box-shadow:0 8px 25px #000,0 0 30px #ff440033}
+.farm-card-name{font-weight:800;font-size:13px;color:#fff;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 0 #000}
+.farm-card-breed{font-size:9px;color:#ffaa66;background:#000a;padding:4px 10px;border-radius:20px;border:1px solid #ff440033;display:inline-block;margin-bottom:8px;letter-spacing:0.5px;font-weight:600}
+.farm-card-stats{display:flex;gap:6px;margin:8px 0;font-size:10px}
+.farm-card-stat{background:linear-gradient(#000,#111);padding:5px 8px;border-radius:8px;border:1px solid #ff440022;color:#ff8844;flex:1;text-align:center;font-weight:600}
+.farm-card-stat b{color:#fff}
+.farm-card-hp{margin:8px 0}
+.farm-card-hp-bar{background:#000;height:8px;border-radius:4px;overflow:hidden;border:1px solid #ff440022}
+.farm-card-hp-fill{height:100%;transition:width 0.4s;border-radius:3px;background:linear-gradient(90deg,#00ff00,#88ff00);box-shadow:0 0 8px #00ff0088}
+.farm-card-actions{display:flex;gap:6px;margin-top:10px}
+.farm-card-actions button{flex:1;padding:9px;border:none;border-radius:10px;font-family:'Black Ops One';font-size:9px;cursor:pointer;letter-spacing:0.5px;box-shadow:0 2px 0 #000}
+.feed-btn{background:linear-gradient(#00cc00,#009900)!important;color:#fff!important}
+.select-btn{background:linear-gradient(#ff6600,#cc4400)!important;color:#fff!important;border:1px solid #ff8800!important}
+.sell-btn{background:linear-gradient(#3a25ffb3,#017888)!important;color:#888!important;border:1px solid #333!important}
+.breed-header{background:linear-gradient(135deg,#4400ff 0%,#8800ff 100%);border:1px solid #6600ff;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 4px 20px #6600ff55}
+.breed-title h2{font-family:'Black Ops One';font-size:17px;color:#fff;margin:0;text-shadow:0 2px 0 #000}
+.breed-title p{font-size:11px;color:#ddbbff;margin-top:4px;font-weight:600}
+.pairing-station{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;background:linear-gradient(145deg,#1a0a2a,#0f0520);border:1px solid #6600ff44;border-radius:14px;padding:12px;margin-bottom:12px;align-items:center;box-shadow:0 4px 15px #000}
+.pair-slot{background:#000a;border:1px solid #6600ff33;border-radius:12px;padding:10px;text-align:center}
+.pair-slot.has-selected{border-color:#8800ff;background:#1a0a2a;box-shadow:0 0 15px #6600ff33}
+.slot-label{font-family:'Black Ops One';font-size:9px;color:#aa88ff;margin-bottom:6px;letter-spacing:0.5px}
+.pair-slot select{width:100%;background:#111;color:#fff;border:1px solid #6600ff33;padding:8px;border-radius:8px;font-size:11px}
+.slot-preview{font-size:10px;color:#666;margin-top:8px;padding:6px;background:#000a;border-radius:8px;border:1px dashed #6600ff22;min-height:28px;display:flex;align-items:center;justify-content:center}
+.slot-preview.has-chicken{color:#fff;background:#1a0a2a;border-style:solid;border-color:#6600ff55}
+.vs-divider{display:flex;flex-direction:column;align-items:center;gap:6px}
+.vs-circle{width:44px;height:44px;background:linear-gradient(#ff6600,#ff0000);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Black Ops One';font-size:12px;box-shadow:0 0 20px #ff0000,0 3px 0 #880000;border:2px solid #fff}
+.breed-action{text-align:center;margin-bottom:14px}
+.breed-btn{background:linear-gradient(#8800ff,#4400ff);color:#fff;border:none;padding:14px 24px;border-radius:12px;font-family:'Black Ops One';font-size:13px;cursor:pointer;letter-spacing:0.5px;box-shadow:0 0 20px #6600ff,0 3px 0 #220088;border:1px solid #aa44ff}
+.breed-msg{margin-top:10px;font-size:11px;font-weight:700;min-height:20px;padding:10px;border-radius:10px;text-align:center}
+.breed-msg.success{background:linear-gradient(#003300,#001100);border:1px solid #00ff00;color:#88ff88;box-shadow:0 0 15px #00ff0033}
+.breed-msg.error{background:linear-gradient(#330000,#110000);border:1px solid #ff0000;color:#ff8888;box-shadow:0 0 15px #ff000033}
+.breed-msg:empty{display:none}
+.incubator-machine{background:linear-gradient(145deg,#1a1000,#0a0800);border:1px solid #ff660044;border-radius:14px;overflow:hidden;margin-bottom:14px;box-shadow:0 4px 15px #000}
+.incubator-status{font-size:11px;color:#ffaa66;background:linear-gradient(#1a0a00,#0f0500);padding:14px;text-align:center;font-weight:700}
+.breed-collection-title{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(90deg,#1a0a2a,#2a1040);padding:12px 14px;border-radius:12px;border:1px solid #6600ff33;margin-bottom:10px;box-shadow:0 2px 10px #000}
+.breed-collection-title h3{font-family:'Black Ops One';font-size:11px;color:#aa88ff;margin:0;letter-spacing:0.5px}
+.collection-count{background:linear-gradient(#ff6600,#ff4400);color:#fff;padding:5px 12px;border-radius:20px;font-family:'Black Ops One';font-size:10px;box-shadow:0 0 10px #ff4400}
+.market-header{background:linear-gradient(135deg,#00aa00 0%,#00ff88 100%);border:1px solid #00ff00;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 4px 20px #00ff0055}
+.chicken-shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.chicken-shop-card{background:linear-gradient(145deg,#0a1e0a,#001000);border:1px solid #00ff0044;border-radius:14px;padding:14px;text-align:center;transition:0.2s;box-shadow:0 4px 15px #000,0 0 20px #00ff0011 inset}
+.chicken-shop-card:hover{border-color:#00ff00;transform:translateY(-3px) scale(1.02);box-shadow:0 8px 25px #000,0 0 30px #00ff0033}
+.chicken-shop-card h4{font-weight:800;font-size:13px;color:#fff;margin:8px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chicken-shop-card p{font-size:10px;color:#88cc88;margin:2px 0;font-weight:600}
+.chicken-shop-card button{width:100%;margin-top:10px;padding:10px;border:none;border-radius:10px;background:linear-gradient(#00ff00,#00aa00);color:#000;font-family:'Black Ops One';font-size:10px;cursor:pointer;box-shadow:0 2px 0 #008800;font-weight:800}
+.feed-shop-grid{display:grid;gap:8px}
+.feed-shop-card{background:linear-gradient(145deg,#1a1200,#0f0a00);border:1px solid #ffaa0044;border-radius:12px;padding:12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:0.2s;box-shadow:0 2px 10px #000}
+.feed-shop-card:hover{border-color:#ffaa00;background:linear-gradient(145deg,#2a1e00,#1a1000);transform:scale(1.02);box-shadow:0 4px 20px #ffaa0033}
+.global-header{background:linear-gradient(135deg,#0066ff 0%,#00aaff 100%);border:1px solid #00aaff;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 4px 20px #0066ff55}
+.global-players{font-size:11px;color:#aaccff;font-weight:600}
+.global-chat{height:140px;overflow:auto;background:#000c;border:1px solid #0066ff33;padding:10px;border-radius:12px;font-size:11px;display:flex;flex-direction:column;gap:6px;box-shadow:0 0 20px #0066ff11 inset}
+#watchCanvas{background:radial-gradient(ellipse at center,#1a1000,#0a0500 70%,#000 100%)!important;border:2px solid #ff6600!important;border-radius:16px!important;box-shadow:0 0 30px #ff440044,0 0 60px #ff440011 inset!important}
+#musicBtn{position:fixed;bottom:14px;left:14px;z-index:500;background:linear-gradient(#222,#111);color:#fff;border:1px solid #ff660044;padding:10px 14px;border-radius:20px;font-size:11px;font-family:'Black Ops One';cursor:pointer;box-shadow:0 2px 10px #000}
+#musicBtn.on{background:linear-gradient(#ff6600,#ff4400);color:#fff;border-color:#ff8800;box-shadow:0 0 15px #ff4400}
+.aboutBtn{position:fixed;top:8px;right:8px;z-index:600;background:linear-gradient(#222,#111);color:#fff;border:1px solid #ff660044;padding:6px 10px;border-radius:10px;font-family:'Black Ops One';font-size:11px;cursor:pointer;box-shadow:0 2px 10px #000}
+#aboutSidebar{position:fixed;top:0;right:-360px;width:340px;max-width:85vw;height:100%;background:linear-gradient(180deg,#1a0a00,#000);border-left:2px solid #ff6600;z-index:9999;transition:0.3s;padding:16px;overflow-y:auto;box-shadow:-10px 0 30px #000}
+#aboutSidebar.open{right:0}
+#aboutOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:#000c;z-index:9998;display:none;backdrop-filter:blur(4px)}
+#aboutOverlay.open{display:block}
+#modeFightBtn.active{background:linear-gradient(#ff6600,#ff4400)!important;color:#fff!important;border-color:#ff8800!important;box-shadow:0 0 20px #ff4400!important}
+#modeWatchBtn.active{background:linear-gradient(#0066ff,#0044ff)!important;color:#fff!important;border-color:#00aaff!important;box-shadow:0 0 20px #0066ff!important}
+#bettorsList{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.bettor-card{background:linear-gradient(145deg,#1a1000,#0f0800);border:1px solid #ff660022;border-radius:12px;padding:10px;font-size:10px;transition:0.2s;position:relative;overflow:hidden;box-shadow:0 2px 10px #000}
+.bettor-card.wala{border-left:3px solid #ff3333;background:linear-gradient(145deg,#2a0a0a,#1a0505);box-shadow:0 0 15px #ff000022}
+.bettor-card.meron{border-left:3px solid #3366ff;background:linear-gradient(145deg,#0a0a2a,#05051a);box-shadow:0 0 15px #0000ff22}
+.bettor-card.winning{border-color:#ffff00;background:linear-gradient(145deg,#2a2a00,#1a1a00);box-shadow:0 0 25px #ffff0044,0 0 50px #ffff0022 inset;transform:scale(1.03)}
+.bettor-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.bettor-name{font-weight:800;font-size:11px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 0 #000}
+.bettor-money{font-size:9px;color:#ffaa66;background:#000a;padding:3px 8px;border-radius:10px;border:1px solid #ff660022;font-weight:700}
+.bettor-money.rich{color:#ffb400;border-color:#332a00;background:#1a1500;box-shadow:0 0 10px #ffb40033}
+.bettor-money.whale{color:#ffaa00;border-color:#443300;background:#221a00;font-weight:800;box-shadow:0 0 15px #ffaa0055}
+.bettor-bet{font-size:10px;color:#888;display:flex;justify-content:space-between;align-items:center;margin:4px 0;font-weight:600}
+.bettor-bet b{color:#fff;font-family:'Black Ops One';font-size:11px}
+.bettor-bet.wala b{color:#ff4444;text-shadow:0 0 8px #ff0000}
+.bettor-bet.meron b{color:#4444ff;text-shadow:0 0 8px #0000ff}
+.bettor-trash{background:#000a;border:1px solid #ff660011;border-radius:8px;padding:7px 9px;margin-top:6px;font-size:10px;color:#aaa;min-height:36px;line-height:1.4;transition:0.3s;font-weight:600}
+.bettor-trash.talking{background:linear-gradient(#1a1000,#0f0a00);border-color:#ff6600;color:#fff;transform:scale(1.02);box-shadow:0 0 15px #ff440033}
+.bettor-trash.real{font-style:italic;color:#ffcc88}
+#bettingPhase.betting-active{border-color:#ff6600!important;background:linear-gradient(145deg,#2a1000,#1a0a00)!important;box-shadow:0 0 20px #ff440033!important}
+#bettingPhase.fighting{border-color:#ff0000!important;background:linear-gradient(145deg,#2a0000,#1a0000)!important;box-shadow:0 0 20px #ff000055!important}
+#bettingTimer{font-family:'Black Ops One';font-size:38px;color:#fff;margin:6px 0;text-shadow:0 0 20px #ff4400,0 2px 0 #000}
+#bettingTimer.warning{color:#ffb400;text-shadow:0 0 20px #ffb400}
+#bettingTimer.danger{color:#ff4444;text-shadow:0 0 20px #ff0000;animation:shake 0.2s infinite}
+@keyframes shake{0%,100%{transform:translateX(0)}50%{transform:translateX(3px)}}
+#watchWinner.winner{color:#ffff00!important;animation:glow 0.8s infinite alternate;text-shadow:0 0 20px #ffff00}
+@keyframes glow{0%{text-shadow:0 0 10px #ffff00}100%{text-shadow:0 0 30px #ffff00,0 0 50px #ff8800}}
+@media(max-width:700px){
+header h1{font-size:12px}
+.farm-grid,.chicken-shop-grid{grid-template-columns:1fr 1fr;gap:8px}
+#bettorsList{grid-template-columns:1fr!important}
+#watchCanvas{max-height:40vh}
+}
